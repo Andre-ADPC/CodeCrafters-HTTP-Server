@@ -1,0 +1,25 @@
+
+Repository Setup
+In-progress
+
+We've prepared a starter repository with some TypeScript code for you.
+Step 1:
+Clone the repository
+command line
+
+git clone https://git.codecrafters.io/9f03a63540a13d2a codecrafters-http-server-typescript
+cd codecrafters-http-server-typescript
+
+Step 2:
+Push an empty commit
+command line
+
+git commit --allow-empty -m 'test'
+git push origin master
+
+When you run the above command, the "Listening for a git push" message below will change, and the first stage will be activated.
+Listening for a git push...
+
+Running into issues with the git clone step? Read this:
+
+https://docs.codecrafters.io/troubleshooting/fix-clone-errors

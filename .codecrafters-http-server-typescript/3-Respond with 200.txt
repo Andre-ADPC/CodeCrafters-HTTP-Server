@@ -1,0 +1,355 @@
+
+Respond with 200 #ia4	In-progress
+***************** Instructions ************************
+
+How to pass this stage
+
+In this stage, you'll implement your own solution. Unlike stage 1, your repository doesn't contain commented code to pass this stage.
+
+98% of users who attempt this stage complete it.
+
+Step 1: Read instructions
+
+Step 2: Implement solution
+
+Step 3: Run tests
+
+Tests failed. Click here to view logs:	https://app.codecrafters.io/courses/http-server/stages/ia4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f#
+
+To run tests again, make changes to your code and run the test command:
+
+codecrafters test # Visit https://codecrafters.io/cli to install
+
+We recommend using the CodeCrafters CLI, but you can use Git too.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Your Task
+In-progress
+Very easy
+
+In this stage, your server will respond to an HTTP request with a 200 response.
+HTTP response
+
+An HTTP response is made up of three parts, each separated by a CRLF (\r\n):
+
+    Status line.
+    Zero or more headers, each ending with a CRLF.
+    Optional response body.
+
+In this stage, your server's response will only contain a status line. Here's the response your server must send:
+
+HTTP/1.1 200 OK\r\n\r\n
+
+Here's a breakdown of the response:
+
+// Status line
+HTTP/1.1  // HTTP version
+200       // Status code
+OK        // Optional reason phrase
+\r\n      // CRLF that marks the end of the status line
+
+// Headers (empty)
+\r\n      // CRLF that marks the end of the headers
+
+// Response body (empty)
+
+Tests
+
+The tester will execute your program like this:
+
+$ ./your_program.sh
+
+The tester will then send an HTTP GET request to your server:
+
+$ curl -v http://localhost:4221
+
+Your server must respond to the request with the following response:
+
+HTTP/1.1 200 OK\r\n\r\n
+
+Notes
+
+    You can ignore the contents of the request. We'll cover parsing requests in later stages.
+    For more information about HTTP responses, see the MDN Web Docs on HTTP responses or the HTTP/1.1 specification.
+    This challenge uses HTTP/1.1.
+
+
+
+
+******************* Code Examples ***********************
+Code Examples using TypeScript
+
+codecrafters-bot	2 months ago
+
+The code creates a TCP server that listens for connections. When a client connects, the server sends a response back to the client. The response is a standard HTTP 200 OK status message, which indicates that the request has succeeded.
+
+Here's the added line of code:
+
+socket.write(Buffer.from(`HTTP/1.1 200 OK\r\n\r\n`));
+
+This line uses the socket.write method to send data to the client. The data is a string that forms a valid HTTP response, which is converted to a Buffer because the underlying TCP socket deals with binary data. The response consists of the HTTP version (HTTP/1.1), the status code (200), a reason phrase (OK), and two CRLF (\r\n\r\n) sequences. The first CRLF marks the end of the status line, and the second signifies the end of the headers section. Since there are no headers or body in this response, the second CRLF also marks the end of the response. After sending the response, socket.end() is called to close the connection.
+
+----------------------------------------------------------------------------------------------------------------------------
+ #### EXAMPLE -01	@@ CONCISE VERSION @@
+ app/main.ts
+
+import * as net from "net";
+
+const server = net.createServer((socket) => {
+
+  socket.write(Buffer.from(`HTTP/1.1 200 OK\r\n\r\n`));
+
+  socket.end();
+
+});
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+server.listen(4221, "localhost", () => {
+
+  console.log("Server is running on port 4221");
+
+});
+
+#### EXAMPLE -02
+ app/main.ts
+
+import * as net from 'net';
+
+const server = net.createServer((socket) => {
+
+    socket.write('HTTP/1.1 200 OK\r\n\r\n')
+
+    socket.end();
+
+});
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+server.listen(4221, 'localhost', () => {
+
+    console.log('Server is running on port 4221');
+
+});
+
+#### EXAMPLE -03
+ app/main.ts
+
+import * as net from "net";
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+const server = net.createServer((socket) => {
+
+  socket.on("close", () => {
+
+    socket.end();
+
+  });
+
+const server = net.createServer((socket: net.Socket) => {
+
+  socket.write(Buffer.from(`HTTP/1.1 200 OK\r\n\r\n`));
+
+  socket.end();
+
+});
+
+server.listen(4221, "localhost");
+
+#### EXAMPLE -04
+ app/main.ts
+
+import * as net from "net";
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+const server = net.createServer((socket) => {
+
+  socket.on("close", () => {
+
+    socket.end();
+
+  });
+
+  socket.on("data", (data) => {
+
+    const request = data.toString();
+
+    console.log("Received request: " + request);
+
+    const response = "HTTP/1.1 200 OK\r\n\r\n";
+
+    socket.write(response);
+
+    socket.end();
+
+  });
+
+});
+
+server.listen(4221, "localhost");
+
+#### EXAMPLE -06
+ app/main.ts
+
+import * as net from "net";
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+const server = net.createServer((socket) => {
+
+  socket.on("data", () => {
+
+    socket.write("HTTP/1.1 200 OK\r\n\r\n")
+
+  })
+
+  socket.on("close", () => {
+
+    socket.end();
+
+  });
+
+});
+
+server.listen(4221, "localhost");
+
+#### EXAMPLE -07
+ app/main.ts
+
+import * as net from "net";
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+const PORT = 4221;
+
+---------------------------------------------------------------------------------------------------------------------------------
+avatar	codecrafters-bot	11 hours ago
+
+The line you're looking at defines a constant PORT with the value 4221. This is a common practice to make the code more readable and maintainable. By assigning the port number to a constant, you can easily refer to it throughout your code and only need to change it in one place if ever needed. Here's how the constant is defined:
+
+const PORT = 4221;
+
+This means that later in the code, instead of using the number 4221 directly, you can use PORT, which makes it clear that this number represents the port the server will listen on.
+---------------------------------------------------------------------------------------------------------------------------------
+
+// Uncomment this to pass the first stage
+
+const server = net.createServer((socket) => {
+
+  socket.on("close", () => {
+
+    socket.end();
+
+  });
+
+---------------------------------------------------------------------------------------------------------------------------------
+ avatar	codecrafters-bot	11 hours ago
+
+In the updated code, when a connection is established to the server, the socket.write method is used to send a response back to the client. The string passed to socket.write is the HTTP response that the server is required to send:
+
+socket.write("HTTP/1.1 200 OK\r\n\r\n");
+
+This response consists of the HTTP version (HTTP/1.1), the status code (200), and the reason phrase (OK), followed by two CRLF (\r\n\r\n) sequences. The first CRLF marks the end of the status line, and the second signifies the end of the headers section, indicating that there are no headers and no response body to follow.
+
+After sending the response, the socket.end method is called to close the writable stream, which effectively closes the connection to the client:
+
+socket.end();
+
+This ensures that the server fulfills the requirement of responding with a 200 OK status and then cleanly closes the connection.
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+server.listen(4221, "localhost");
+
+server.listen(PORT, "localhost", () =>
+
+  console.log(`Server started listening on port ${PORT}`)
+
+);
+
+---------------------------------------------------------------------------------------------------------------------------------
+avatar	codecrafters-bot	11 hours ago
+
+The changes made here start the server and listen for connections on a specified port. The server.listen method is updated to include a callback function that is executed once the server starts listening. This callback function logs a message to the console, indicating that the server has successfully started and is listening on the designated port. The PORT constant is used to specify the port number, making the code more maintainable by avoiding hard-coded values.
+
+Here's the updated code block:
+
+server.listen(PORT, "localhost", () =>
+  console.log(`Server started listening on port ${PORT}`)
+);
+
+By using a callback function with server.listen, you get immediate feedback in the console when the server is ready, which can be helpful for debugging and ensuring that the server has started as expected.
+---------------------------------------------------------------------------------------------------------------------------------
+
+#### EXAMPLE -08
+ app/main.ts
+
+import * as net from "net";
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+const server = net.createServer((socket) => {
+
+    socket.on("data", () => {
+
+        socket.write("HTTP/1.1 200 OK\r\n\r\n");
+
+        // socket.write("Hello, World!");
+
+        socket.end();
+--------------------------------------------------------------------------------------------------------------------------------
+avatar	codecrafters-bot	14 hours ago
+
+The added code sets up an event listener for the "data" event on the socket. When the server receives data (indicating an incoming HTTP request), the callback function is triggered. Inside this function, the server writes a response back to the client using socket.write. The response is a string that forms a valid HTTP response with a status line indicating a successful request (200 OK). After sending the response, socket.end is called to close the connection.
+
+Here's the response that's being sent:
+
+socket.write("HTTP/1.1 200 OK\r\n\r\n");
+
+The double CRLF (\r\n\r\n) signifies the end of the headers section and the start of the body, which in this case is empty. The socket.end method is used to finalize the response and close the connection. This is a simple HTTP server response that doesn't include any headers or body content, just the status line.
+---------------------------------------------------------------------------------------------------------------------------------
+    });
+
+    socket.on("close", () => {
+
+        socket.end();
+
+    });
+
+});
+
+server.listen(4221, "localhost");
+
+#### EXAMPLE -09
+
+#### EXAMPLE -10
+
+#### EXAMPLE -11
+
+******************* Screencasts *************************
+Concepts
+Forum

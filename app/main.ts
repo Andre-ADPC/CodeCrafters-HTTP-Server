@@ -14,7 +14,7 @@ const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     const request = data.toString();
     const path = request.split(" ")[1];
-    const content_type = "Plain Text";
+    const content_type = "text/plain";
 
     //  const response =
     //    path === "/" ? "HTTP/1.1 200 OK\r\n\r\n" : "HTTP/1.1 404 Not Found\r\n\r\n";
@@ -35,12 +35,14 @@ const server = net.createServer((socket) => {
 
     // Testing for User-Client
     if (path === "/user-client") {
-      const resp_body = request.split("\r\n").find((el) => el.toLowerCase().includes("user-client:"));
+      const resp_body = request
+        .split("\r\n")
+        .find((el) => el.toLowerCase().includes("user-client:"));
       //!
       //  .slice("user-client:".length)
       //  .trim();
       console.log("request", request.split("\r\n"));
-      console.log("resp_body",resp_body);
+      console.log("resp_body", resp_body);
       response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;
     }
 

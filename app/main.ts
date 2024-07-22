@@ -31,7 +31,9 @@ const server = net.createServer((socket) => {
     if (path === "/User-Agent") {
       const resp_body = request
         .split("\r\n")
-        .find((el) => el.toLowerCase().includes("User-Agent:"));
+        .find((el) => el.toLowerCase().includes("User-Agent:"))!
+        .slice("user-agent:".length)
+        .trim();
       console.log("request", request.split("\r\n"));
       console.log("resp_body", resp_body);
       response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;

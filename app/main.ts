@@ -12,6 +12,6 @@ const server = net.createServer((socket) => {
   socket.end();
 });
 
-server.listen(4227, "localhost", () => {
-  console.log("Server is running on port 4227");
+server.listen(4221, "localhost", () => {
+  console.log("Server is running on port 4221");
 });

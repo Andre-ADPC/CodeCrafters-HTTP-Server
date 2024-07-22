@@ -12,8 +12,8 @@ const server = net.createServer((socket) => {
   // Opening the Socket
 
   socket.on("data", (data) => {
-    const req = data.toString();
-    const path = req.split(" ")[1];
+    const request = data.toString();
+    const path = request.split(" ")[1];
 
     // Default Response
     let response = "HTTP/1.1 404 Not Found\r\n\r\n";
@@ -30,12 +30,12 @@ const server = net.createServer((socket) => {
 
     // Testing for User-Agent
     if (path === "/user-agent") {
-      const str = req
+      const str = request
         .split("\r\n")
         .find((el) => el.toLowerCase().includes("user-agent:"))!
         .slice("user-agent:".length)
         .trim();
-      // console.log("req",req.split('\r\n'));
+      // console.log("request",request.split('\r\n'));
       // console.log("str",str);
       response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${str.length}\r\n\r\n${str}`;
     }

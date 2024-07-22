@@ -22,6 +22,15 @@ codecrafters test # Visit https://codecrafters.io/cli to install
 
 We recommend using the CodeCrafters CLI, but you can use Git too.
 
+#### Using Git - WSL not available atm. ####
+
+
+git add .
+git commit --allow-empty -m "pass stage" # any message
+git push origin master
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------
 Your Task
 In-progress

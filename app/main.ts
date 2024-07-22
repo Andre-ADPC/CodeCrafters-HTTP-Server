@@ -34,16 +34,19 @@ const server = net.createServer((socket) => {
       const resp_body = request
         .split("\r\n")
         .find((el) => el.toLowerCase().includes("User-Agent:"))!
-        .slice("user-agent:".length)
+        .slice("User-Agent:".length)
         .trim();
       console.log("request", request.split("\r\n"));
       console.log("resp_body", resp_body);
       response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;
     }
 
+    // Testing for Files
     if (path.startsWith("/files/")) {
+      const resp_body = request;
       const fileName = path.slice("/files/".length);
-      const fileSize = statSync("tmp/" + fileName).size;
+      //const fileSize = statSync("tmp/" + fileName).size;
+      const fileSize = statSync(process.argv[3] + fileName).size;
       response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileSize}\r\n\r\n${resp_body}`;
     }
 

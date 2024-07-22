@@ -8,36 +8,52 @@ const server = net.createServer((socket) => {
   });
 
   // Openning the Socket
-  const server = net.createServer((socket) => {
-    // socket.write("HTTP/1.1 200 OK\r\n\r\n");
+  // const server = net.createServer((socket) => {
+  // socket.write("HTTP/1.1 200 OK\r\n\r\n");
 
-    socket.on("data", (data) => {
-      const request = data.toString();
-      const path = request.split(" ")[1];
-      //  const response =
-      //    path === "/" ? "HTTP/1.1 200 OK\r\n\r\n" : "HTTP/1.1 404 Not Found\r\n\r\n";
-      //  socket.write(response);
+  socket.on("data", (data) => {
+    const request = data.toString();
+    const path = request.split(" ")[1];
+    //  const response =
+    //    path === "/" ? "HTTP/1.1 200 OK\r\n\r\n" : "HTTP/1.1 404 Not Found\r\n\r\n";
+    //  socket.write(response);
 
-      // Updated Response
-      let response = 'HTTP/1.1 404 Not Found\r\n\r\n';
-      if (path === '/') {
-        response = 'HTTP/1.1 200 OK\r\n\r\n';
-      }
-      if (path.startsWith('/echo/')) {
-        response = `HTTP/1.1 200 OK\r\nContent-Type: Plain Text\r\nContent-Length: 3\r\n\r\n${path.split('/echo/')}`;
-      }
-      socket.write(response);
-      socket.end();
-    });
+    // Updated Response
+    let response = "HTTP/1.1 404 Not Found\r\n\r\n";
+    if (path === "/") {
+      response = "HTTP/1.1 200 OK\r\n\r\n";
+    }
+
+    if (path.startsWith("/echo/")) {
+      const string = path.slice("/echo/".length);
+      console.log(path);
+      console.log(string);
+      response = `HTTP/1.1 200 OK\r\nContent-Type: Plain Text\r\nContent-Length: ${string.length}\r\n\r\n${string}`;
+    }
+
+    // Testing for User-Client
+    if (path === "/user-client") {
+      const string = request
+        .split(" ")
+        .find((el) => el.toLowerCase().includes("user-client"))!
+        .slice("user-client:".length)
+        .trim();
+      console.log(request);
+      console.log(string);
+      response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${string.length}\r\n\r\n${string}`;
+    }
+
+    socket.write(response);
+    socket.end();
   });
+});
 
-  // You can use print statements as follows for debugging, they'll be visible when running tests.
+// You can use print statements as follows for debugging, they'll be visible when running tests.
 
-  console.log("Logs from your program will appear here!");
+console.log("Logs from your program will appear here!");
 
-  // Uncomment this to pass the first stage
+// Uncomment this to pass the first stage
 
-  server.listen(4221, "localhost", () => {
-    console.log("Server is running on port 4221");
-  });
-})
+server.listen(4221, "localhost", () => {
+  console.log("Server is running on port 4221");
+});

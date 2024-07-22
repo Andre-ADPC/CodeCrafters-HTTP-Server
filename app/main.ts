@@ -1,6 +1,8 @@
 /** @format */
 
 import * as net from "net";
+import { readFileSync, statSync } from "fs";
+
 // Closing the Socket
 const server = net.createServer((socket) => {
   socket.on("close", () => {
@@ -37,6 +39,12 @@ const server = net.createServer((socket) => {
       console.log("request", request.split("\r\n"));
       console.log("resp_body", resp_body);
       response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;
+    }
+
+    if (path.startsWith("/files/")) {
+      const fileName = path.slice("/files/".length);
+      const fileSize = statSync("tmp/" + fileName).size;
+      response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileSize}\r\n\r\n${resp_body}`;
     }
 
     socket.write(response);

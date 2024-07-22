@@ -14,6 +14,8 @@ const server = net.createServer((socket) => {
   socket.on("data", (data) => {
     const request = data.toString();
     const path = request.split(" ")[1];
+    const content_type = "Plain Text";
+
     //  const response =
     //    path === "/" ? "HTTP/1.1 200 OK\r\n\r\n" : "HTTP/1.1 404 Not Found\r\n\r\n";
     //  socket.write(response);
@@ -25,22 +27,21 @@ const server = net.createServer((socket) => {
     }
 
     if (path.startsWith("/echo/")) {
-      const string = path.slice("/echo/".length);
-      console.log(path);
-      console.log(string);
-      response = `HTTP/1.1 200 OK\r\nContent-Type: Plain Text\r\nContent-Length: ${string.length}\r\n\r\n${string}`;
+      const resp_body = path.slice("/echo/".length);
+      // console.log(path);
+      // console.log(resp_body);
+      response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;
     }
 
     // Testing for User-Client
     if (path === "/user-client") {
-      const string = request
-        .split(" ")
-        .find((el) => el.toLowerCase().includes("user-client"))!
-        .slice("user-client:".length)
-        .trim();
-      console.log(request);
-      console.log(string);
-      response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${string.length}\r\n\r\n${string}`;
+      const resp_body = request.split("\r\n").find((el) => el.toLowerCase().includes("user-client:"));
+      //!
+      //  .slice("user-client:".length)
+      //  .trim();
+      console.log("request", request.split("\r\n"));
+      console.log("resp_body",resp_body);
+      response = `HTTP/1.1 200 OK\r\nContent-Type: ${content_type}\r\nContent-Length: ${resp_body.length}\r\n\r\n${resp_body}`;
     }
 
     socket.write(response);

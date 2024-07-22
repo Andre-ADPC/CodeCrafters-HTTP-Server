@@ -3,6 +3,13 @@
 [![progress-banner](https://backend.codecrafters.io/progress/http-server/c0244b38-47ec-4d61-9992-09940cf4b97f)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
 
 # CodeCrafters  —  Build Your Own HTTP Server in TypeScript
+My personal Practice Repo on [CodeCrafters](https://git.codecrafters.io/9f03a63540a13d2a)
+
+#### Future-planned Variants of the Same Concepts
+[Variation 1 - HTTP 1.2 Server with TypeScript]()
+[Variation 2 - HTTP 1.2 Server With Python]()
+[Variation 3 - HTTP 1.2 Server With C]()
+[Variation 4 - HTTP 1.2 Server With Rust]()
 
 ## Introduction
 Welcome to the Build your own HTTP server challenge!

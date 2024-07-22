@@ -15,7 +15,7 @@ const server = net.createServer((socket) => {
     socket.write(response);
 
     socket.end();
-  });
+  })
 });
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.

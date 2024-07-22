@@ -47,7 +47,7 @@ const server = net.createServer((socket) => {
       const fileName = path.slice("/files/".length);
       //const fileSize = statSync("tmp/" + fileName).size;
       const fileSize = statSync(process.argv[3] + fileName).size;
-      response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileSize}\r\n\r\n${resp_body}`;
+      response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileName}\r\n\r\n${resp_body}`;
     }
 
     socket.write(response);

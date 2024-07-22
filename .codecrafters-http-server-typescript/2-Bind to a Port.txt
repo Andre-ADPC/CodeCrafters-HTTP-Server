@@ -1,0 +1,28 @@
+How to pass this stage
+
+Since this is the first stage, we've included some commented code to help you get started. To pass this stage, simply uncomment the code and submit your changes.
+
+Step 1: Navigate to app/main.ts
+
+Step 2: Uncomment code
+
+Step 3: Submit changes
+Test Runner:
+Tests passed!
+
+You can now mark Bind to a port as complete! 🎉
+
+We recommend reviewing the code you just uncommented. You'll need to build on it in the next stages.
+
+Your Task = In-progress 		Level: Very easy
+
+In this stage, you'll create a TCP server that listens on port 4221.
+
+TCP is the underlying protocol used by HTTP servers.
+Tests
+
+The tester will execute your program like this:
+
+$ ./your_program.sh
+
+Then, the tester will try to connect to your server on port 4221. The connection must succeed for you to pass this stage.

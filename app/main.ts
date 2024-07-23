@@ -35,15 +35,12 @@ const server = net.createServer((socket) => {
         .find((el) => el.toLowerCase().includes("user-agent:"))!
         .slice("user-agent:".length)
         .trim();
-      // console.log("request",request.split('\r\n'));
-      // console.log("str",str);
       response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${str.length}\r\n\r\n${str}`;
     }
 
     // Testing for Files
     if (path.startsWith("/files/")) {
       const fileName = path.slice("/files/".length).trim();
-      // const fileSize = statSync('tmp/'+fileName).size;
       const fileSize = statSync(process.argv[3] + fileName).size;
       const fileContent = readFileSync(process.argv[3] + fileName);
       response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileSize}\r\n\r\n${fileContent}`;
@@ -52,7 +49,6 @@ const server = net.createServer((socket) => {
     socket.end();
   });
 });
-
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 console.log("Logs from your program will appear here!");

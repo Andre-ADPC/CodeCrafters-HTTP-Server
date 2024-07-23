@@ -1,6 +1,6 @@
 /** @format */
 import * as net from "net";
-import { readFileSync, statSync } from "fs"; // Refactor?
+import { readFileSync } from "fs";  // Refactor?
 import { readFile } from "fs/promises";
 
 // Terminating the Socket
@@ -10,7 +10,7 @@ const server = net.createServer((socket) => {
   });
 
   // Opening the Socket
-  socket.on("data", (data) => {
+  socket.on("data", async (data) => {
     const request = data.toString();
     const method = request.split(" ")[0];
     const path = request.split(" ")[1];
@@ -39,9 +39,9 @@ const server = net.createServer((socket) => {
       // Testing for Files - Reading Method
     } else if (path.startsWith("/files/") && method === "GET") {
       const fileName = path.slice("/files/".length).trim();
-      // const fileSize = statSync(process.argv[3] + fileName).size;
+      // const fileSize = statSync('tmp/'+fileName).size;
       try {
-        const fileContent = readFileSync(process.argv[3] + fileName);
+        const fileContent = await readFile(process.argv[3] + fileName);
         response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileContent.length}\r\n\r\n${fileContent}`;
       } catch {
         response = `HTTP/1.1 404 Not Found\r\n\r\n`;

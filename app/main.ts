@@ -49,17 +49,20 @@ const server = net.createServer((socket) => {
       // Testing for Files - Writing Method
     } else if (path.startsWith("/files/") && method === "POST") {
       const fileName = path.slice("/files/".length).trim();
-      console.log(request.split("\r\n"));
-      const data = request
+      console.log("1", request.split("\r\n"));
+      const file_data = request
         .split("\r\n")
         .find((el) => el.toLowerCase().includes("data"))!
-        .slice("data ".length)
+        .slice("data".length)
         .trim();
-      console.log("hello");
-      console.log(fileName);
-      console.log(data);
+      console.log("Hello HTTP Socket!");
+      console.log("2", fileName);
+      console.log("3", file_data);
       try {
-        const file = await writeFile(process.argv[3] + fileName, data);
+        const file = await writeFile(
+          process.argv[3] + "/" + fileName,
+          file_data
+        );
         response = `HTTP/1.1 201 Created\r\n\r\n`;
       } catch {
         response = `HTTP/1.1 404 Not Found\r\n\r\n`;

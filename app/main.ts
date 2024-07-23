@@ -1,6 +1,5 @@
 /** @format */
 import * as net from "net";
-import { readFileSync, statSync } from "fs"; // Refactor?
 import { readFile, writeFile } from "fs/promises";
 
 // Terminating the Socket
@@ -14,10 +13,6 @@ const server = net.createServer((socket) => {
     const [requestLine, ...headers] = data.toString().split("\r\n");
     const [file_data] = headers.splice(headers.length - 1);
     const [method, path] = requestLine.split(" ");
-  //  const request = data.toString();
-  //  const method = request.split(" ")[0];
-  //  const path = request.split(" ")[1];
-  //  const content_type = "text/plain";
 
     // Default Response
     let response = "HTTP/1.1 404 Not Found\r\n\r\n";
@@ -26,6 +21,7 @@ const server = net.createServer((socket) => {
     if (path === "/") {
       response = "HTTP/1.1 200 OK\r\n\r\n";
     }
+
     //Conditional Response - Sub-paths
     if (path.startsWith("/echo/") && method === "GET") {
       const path_str = path.slice("/echo/".length);
@@ -59,6 +55,7 @@ const server = net.createServer((socket) => {
       console.log("2", fileName);
       console.log("3", file_data);
       try {
+        // Further Processing might happen from hereon with "file" getting written to somewhere.
         const file = await writeFile(
           process.argv[3] + "/" + fileName,
           file_data

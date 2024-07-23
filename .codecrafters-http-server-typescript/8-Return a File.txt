@@ -1,0 +1,252 @@
+
+Return a file #ap6	In-progress
+************************ Instructions ************************
+Your Task	In-progress	Medium
+
+In this stage, you'll implement the /files/{filename} endpoint, which returns a requested file to the client.
+Tests
+
+The tester will execute your program with a --directory flag. The --directory flag specifies the directory where the files are stored, as an absolute path.
+
+$ ./your_program.sh --directory /tmp/
+
+The tester will then send two GET requests to the /files/{filename} endpoint on your server.
+First request
+
+The first request will ask for a file that exists in the files directory:
+
+$ echo -n 'Hello, World!' > /tmp/foo
+$ curl -i http://localhost:4221/files/foo
+
+Your server must respond with a 200 response that contains the following parts:
+
+    Content-Type header set to application/octet-stream.
+    Content-Length header set to the size of the file, in bytes.
+    Response body set to the file contents.
+
+HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: 14\r\n\r\nHello, World!
+
+Second request
+
+The second request will ask for a file that doesn't exist in the files directory:
+
+$ curl -i http://localhost:4221/files/non_existant_file
+
+Your server must respond with a 404 response:
+
+HTTP/1.1 404 Not Found\r\n\r\n
+
+
+#################	HINTS		##############
+Just FYI the tests expect the Content-Length header.
+
+
+####	REFACTORING CODE 
+
+Test Runner:	Tests passed!
+
+You can either refactor your code or move on the next step.
+
+    Move to next step	    Refactor code
+
+Make changes to your code and run the following commands:
+
+git add .
+git commit --allow-empty -m "run tests" # any message
+git push origin master
+
+************************ Code Examples ************************
+Code Examples using TypeScript
+----------------------------------------------------------------------------------------------------------------------------
+ #### EXAMPLE -01	@@ CONCISE VERSION @@
+ app/main.ts
+
+import * as net from "net";
+
+import fs from "node:fs";
+----------------------------------------------------------------------------------------------------------------------------
+// Comments	avatar	codecrafters-bot	2 months ago
+
+We've imported the fs module from Node.js, which provides a lot of functionality to work with the file system. In this case, we'll use it to read files from the disk. The fs module is a core Node.js module, so it doesn't need to be installed separately, but it does need to be imported when you want to use it in your code. Here's how the import looks:
+
+import fs from "node:fs";
+
+By importing fs, we're now able to use its functions, such as readFileSync, which we'll use later to read the contents of a file when a request for that file is received.
+
+const server = net.createServer((socket) => {
+
+  socket.on("data", (data) => {
+
+Expand 17 lines
+// Comments	END
+----------------------------------------------------------------------------------------------------------------------------
+      socket.write(
+
+        `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${agent.length}\r\n\r\n${agent}`
+
+      );
+
+
+    } else if (path.startsWith("/files/")) {
+
+      const [_, __, fileName] = path.split("/");
+
+      const args = process.argv.slice(2);
+
+      const [___, absPath] = args;
+
+      const filePath = absPath + "/" + fileName;
+
+      try {
+
+        const content = fs.readFileSync(filePath);
+
+        socket.write(
+
+          `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${content.length}\r\n\r\n${content}`
+
+        );
+
+      } catch (error) {
+
+        socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+
+----------------------------------------------------------------------------------------------------------------------------
+// Comments	avatar	codecrafters-bot	2 months ago
+
+
+The added code checks if the requested path starts with /files/. If it does, it splits the path to extract the fileName. It then retrieves the absolute path to the directory from the command line arguments passed to the program. By concatenating the absolute path with the fileName, it constructs the full filePath.
+
+Next, it attempts to read the file synchronously using fs.readFileSync(filePath). If the file is successfully read, the server responds with a 200 OK status, sets the Content-Type to application/octet-stream, and includes the Content-Length header followed by the file content in the response body.
+
+If an error occurs during file reading, which typically happens if the file does not exist, it catches the error and responds with a 404 Not Found status.
+
+Here's a snippet of the code handling the file request:
+
+else if (path.startsWith("/files/")) {
+  const [_, __, fileName] = path.split("/");
+  const args = process.argv.slice(2);
+  const [___, absPath] = args;
+  const filePath = absPath + "/" + fileName;
+
+  try {
+    const content = fs.readFileSync(filePath);
+    socket.write(
+      `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${content.length}\r\n\r\n${content}`
+    );
+  } catch (error) {
+    socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+  }
+}
+
+// Comments	END
+----------------------------------------------------------------------------------------------------------------------------
+ }
+
+    } else {
+
+      socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
+
+    }
+
+    socket.end();
+
+  });
+
+});
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+server.listen(4221, "localhost", () => {
+
+  console.log("Server is running on port 4221");
+
+});
+
+----------------------------------------------------------------------------------------------------------------------------
+ #### EXAMPLE -02	@@ CONCISE VERSION @@
+ app/main.ts
+import * as fs from 'fs';
+
+import * as net from 'net';
+
+import * as process from 'process';
+
+const server: net.Server = net.createServer((socket: net.socket) => {
+
+    // socket.write('HTTP/1.1 200 OK\r\n\r\n');
+
+    // socket.end();
+
+    socket.on('data', (buffer: net.Buffer | string) => {
+
+        let request: string[] = buffer.toString().split(' ');
+
+        let path: string = request[1];
+
+        if (path === '/') {
+
+            socket.write('HTTP/1.1 200 OK\r\n\r\n');
+
+        } else {
+
+            let pathContents: string[] = path.split('/');
+
+            pathContents.shift();
+
+            if (pathContents[0] === 'echo') {
+
+                socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${pathContents[1].length}\r\n\r\n${pathContents[1]}`);
+
+            } else if (pathContents[0] === 'user-agent') {
+
+                let userAgent: string[] = request.at(-1).trim();
+
+                socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${userAgent.length}\r\n\r\n${userAgent}`);
+
+
+            } else if (pathContents[0] === 'files') {
+
+                let directory: string = process.argv[3];
+
+                let fileName: string = pathContents[1]
+
+                fs.readFile(directory + fileName, 'utf8', (err: Error, data: string) => {
+
+                    if (err) {
+
+                        socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
+
+                    }
+
+                    socket.write(`HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${data.length}\r\n\r\n${data}`);
+
+                })
+
+            } else {
+
+                socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
+
+            }
+
+        }
+
+    })
+
+});
+
+// You can use print statements as follows for debugging, they'll be visible when running tests.
+
+console.log("Logs from your program will appear here!");
+
+// Uncomment this to pass the first stage
+
+server.listen(4221, 'localhost', () => {
+
+    console.log('Server is running on port 4221');
+
+});

@@ -1,6 +1,6 @@
 
 Respond with 200 #ia4	In-progress
-***************** Instructions ************************
+************************ Instructions ************************
 
 How to pass this stage
 
@@ -32,9 +32,7 @@ git push origin master
 
 
 --------------------------------------------------------------------------------------------------------------------------------------
-Your Task
-In-progress
-Very easy
+Your Task	In-progress	Very easy
 
 In this stage, your server will respond to an HTTP request with a 200 response.
 HTTP response
@@ -85,7 +83,7 @@ Notes
 
 
 
-******************* Code Examples ***********************
+************************ Code Examples ************************
 Code Examples using TypeScript
 
 codecrafters-bot	2 months ago
@@ -252,7 +250,7 @@ console.log("Logs from your program will appear here!");
 const PORT = 4221;
 
 ---------------------------------------------------------------------------------------------------------------------------------
-avatar	codecrafters-bot	11 hours ago
+// Comments	avatar	codecrafters-bot	11 hours ago
 
 The line you're looking at defines a constant PORT with the value 4221. This is a common practice to make the code more readable and maintainable. By assigning the port number to a constant, you can easily refer to it throughout your code and only need to change it in one place if ever needed. Here's how the constant is defined:
 
@@ -272,7 +270,7 @@ const server = net.createServer((socket) => {
   });
 
 ---------------------------------------------------------------------------------------------------------------------------------
- avatar	codecrafters-bot	11 hours ago
+ // Comments	avatar	codecrafters-bot	11 hours ago
 
 In the updated code, when a connection is established to the server, the socket.write method is used to send a response back to the client. The string passed to socket.write is the HTTP response that the server is required to send:
 
@@ -297,7 +295,7 @@ server.listen(PORT, "localhost", () =>
 );
 
 ---------------------------------------------------------------------------------------------------------------------------------
-avatar	codecrafters-bot	11 hours ago
+// Comments	avatar	codecrafters-bot	11 hours ago
 
 The changes made here start the server and listen for connections on a specified port. The server.listen method is updated to include a callback function that is executed once the server starts listening. This callback function logs a message to the console, indicating that the server has successfully started and is listening on the designated port. The PORT constant is used to specify the port number, making the code more maintainable by avoiding hard-coded values.
 
@@ -331,7 +329,7 @@ const server = net.createServer((socket) => {
 
         socket.end();
 --------------------------------------------------------------------------------------------------------------------------------
-avatar	codecrafters-bot	14 hours ago
+// Comments	avatar	codecrafters-bot	14 hours ago
 
 The added code sets up an event listener for the "data" event on the socket. When the server receives data (indicating an incoming HTTP request), the callback function is triggered. Inside this function, the server writes a response back to the client using socket.write. The response is a string that forms a valid HTTP response with a status line indicating a successful request (200 OK). After sending the response, socket.end is called to close the connection.
 
@@ -359,6 +357,6 @@ server.listen(4221, "localhost");
 
 #### EXAMPLE -11
 
-******************* Screencasts *************************
+************************ Screencasts *************************
 Concepts
 Forum

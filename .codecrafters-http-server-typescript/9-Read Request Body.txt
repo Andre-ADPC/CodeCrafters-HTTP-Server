@@ -1,0 +1,44 @@
+
+Return a file #ap6	In-progress
+************************ Instructions ************************
+Your Task	In-progress	Medium
+
+
+
+#################	HINTS		##############
+
+####	REFACTORING CODE 
+
+Test Runner:	Tests passed!
+
+You can either refactor your code or move on the next step.
+
+    Move to next step	    Refactor code
+
+Make changes to your code and run the following commands:
+
+git add .
+git commit --allow-empty -m "run tests" # any message
+git push origin master
+
+
+************************ Code Examples ************************
+Code Examples using TypeScript
+----------------------------------------------------------------------------------------------------------------------------
+ #### EXAMPLE -01	@@ CONCISE VERSION @@
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+// Comments	avatar	codecrafters-bot	2 months ago
+
+
+// Comments	END
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+ #### EXAMPLE -02	@@ CONCISE VERSION @@
+ app/main.ts

@@ -11,13 +11,17 @@ const server = net.createServer((socket) => {
 
   // Opening the Socket
   socket.on("data", async (data) => {
-    const request = data.toString();
-    const method = request.split(" ")[0];
-    const path = request.split(" ")[1];
-    const content_type = "text/plain";
+    const [requestLine, ...headers] = data.toString().split("\r\n");
+    const [file_data] = headers.splice(headers.length - 1);
+    const [method, path] = requestLine.split(" ");
+  //  const request = data.toString();
+  //  const method = request.split(" ")[0];
+  //  const path = request.split(" ")[1];
+  //  const content_type = "text/plain";
 
     // Default Response
     let response = "HTTP/1.1 404 Not Found\r\n\r\n";
+
     //Conditional Response - Path Starting-point
     if (path === "/") {
       response = "HTTP/1.1 200 OK\r\n\r\n";
@@ -29,8 +33,7 @@ const server = net.createServer((socket) => {
 
       // Testing for User-Agent Header
     } else if (path === "/user-agent" && method === "GET") {
-      const path_str = request
-        .split("\r\n")
+      const path_str = headers
         .find((el) => el.toLowerCase().includes("user-agent:"))!
         .slice("user-agent:".length)
         .trim();
@@ -39,22 +42,19 @@ const server = net.createServer((socket) => {
       // Testing for Files - Reading Method
     } else if (path.startsWith("/files/") && method === "GET") {
       const fileName = path.slice("/files/".length).trim();
-      // const fileSize = statSync(process.argv[3] + fileName).size;
+
       try {
         const fileContent = await readFile(process.argv[3] + fileName);
         response = `HTTP/1.1 200 OK\r\nContent-Type: application/octet-stream\r\nContent-Length: ${fileContent.length}\r\n\r\n${fileContent}`;
       } catch {
         response = `HTTP/1.1 404 Not Found\r\n\r\n`;
       }
+
       // Testing for Files - Writing Method
     } else if (path.startsWith("/files/") && method === "POST") {
       const fileName = path.slice("/files/".length).trim();
-      console.log("1", request.split("\r\n"));
-      const file_data = request
-        .split("\r\n")
-        .find((el) => el.toLowerCase().includes("data"))!
-        .slice("data".length)
-        .trim();
+      // console.log("1", request.split("\r\n"));
+      // const file_data = request.split("\r\n").find((el) => el.toLowerCase().includes("data"))!.slice("data".length).trim();
       console.log("Hello HTTP Socket!");
       console.log("2", fileName);
       console.log("3", file_data);

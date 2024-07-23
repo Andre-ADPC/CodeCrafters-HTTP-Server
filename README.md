@@ -1,9 +1,12 @@
 <!-- @format -->
-
+---
 [![progress-banner](https://backend.codecrafters.io/progress/http-server/c0244b38-47ec-4d61-9992-09940cf4b97f)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
 
-# CodeCrafters  —  Build Your Own HTTP Server in TypeScript
-My personal Practice Repo on [CodeCrafters](https://git.codecrafters.io/9f03a63540a13d2a)
+---
+# CodeCrafters  —  Build Your Own HTTP 1.1 Server in TypeScript + Bun
+My personal Practice Repo on [CodeCrafters](https://app.codecrafters.io/courses/http-server/stages/df4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f). You will not be able to access it though, and it's here for a personal reference.
+
+To test the server's functionality the CodeCrafters's [HTTP Server Tester](https://github.com/codecrafters-io/http-server-tester) public repository was made available.
 
 #### Future-planned Variants of the Same Concepts
 [Variation 1 - HTTP 1.2 Server with TypeScript]()
@@ -23,8 +26,7 @@ This is a starting point for **TypeScript** solutions to the
 ["Build Your Own HTTP server" Challenge](https://app.codecrafters.io/courses/http-server/overview).
 
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
-protocol that powers the web. In this challenge, you'll build a HTTP/1.1 server
-that is capable of serving multiple clients.
+protocol that powers the web. In this challenge, you'll build a **HTTP/1.1** server that is capable of serving multiple clients.
 
 Along the way you'll learn about TCP servers,
 [HTTP request syntax](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html),
@@ -33,6 +35,11 @@ and more.
 **Note**: If you're viewing this repo on GitHub, head over to
 [codecrafters.io](https://codecrafters.io) to try the challenge.
 
+* This project contains various files of the main server logic for handling HTTP requests at different stages of development - **main.ts** through to **main6.ts**.
+ * It creates a TCP server that listens on port 4221 and handles GET and POST requests.
+ * The server can serve static files, echo back request paths, and return the User-Agent header value.
+ * The server requires a directory path to serve files from, which can be passed as a command line argument.
+ * The server can additionally
 
 ## Stage 1 — Binding to a Port
 

@@ -1,23 +1,28 @@
 <!-- @format -->
+## **$${\color{#103530}Welcome}$$**
+
 ---
 [![progress-banner](https://backend.codecrafters.io/progress/http-server/c0244b38-47ec-4d61-9992-09940cf4b97f)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
 
 ---
-# CodeCrafters  —  Build Your Own HTTP 1.1 Server in TypeScript + Bun
-My personal Practice Repo on [CodeCrafters](https://app.codecrafters.io/courses/http-server/stages/df4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f). You will not be able to access it though, and it's here for a personal reference.
+
+# CodeCrafters  —  Build Your Own HTTP 1.1 Server in TypeScript with Bun
+My personal Practice Repo is also on [CodeCrafters](https://app.codecrafters.io/courses/http-server/stages/df4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f). You will not be able to access it though, but it's easy to get started on the **[CodeCrafters](https://app.codecrafters.io/courses/)** platform and tinker with various coding challenges.
+
+Its results are posted here for a personal reference, and to share with those that might be interested in the approach I applied to make it work.
 
 To test the server's functionality the CodeCrafters's [HTTP Server Tester](https://github.com/codecrafters-io/http-server-tester) public repository was made available.
 
 #### Future-planned Variants of the Same Concepts
-[Variation 1 - HTTP 1.2 Server with TypeScript]()
-[Variation 2 - HTTP 1.2 Server With Python]()
-[Variation 3 - HTTP 1.2 Server With C]()
-[Variation 4 - HTTP 1.2 Server With Rust]()
+* [Variation 1 - HTTP 1.2 Server with TypeScript]()
+* [Variation 2 - HTTP 1.2 Server With Python]()
+* [Variation 3 - HTTP 1.2 Server With C]()
+* [Variation 4 - HTTP 1.2 Server With Rust]()
 
 ## Introduction
-Welcome to the Build your own HTTP server challenge!
+Welcome to the Build Your Own HTTP Server challenge!
 
-HTTP is the protocol that powers the web. In this challenge, you'll build a HTTP server that's capable of handling simple GET/POST requests, serving files and handling multiple concurrent connections.
+HTTP is the protocol that powers the web. In this challenge, you'll build an HTTP server that's capable of handling simple GET/POST requests, serving files and handling multiple concurrent connections.
 
 Along the way, we'll learn about TCP connections, HTTP headers, HTTP verbs, handling multiple connections and more.
 
@@ -28,7 +33,7 @@ This is a starting point for **TypeScript** solutions to the
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
 protocol that powers the web. In this challenge, you'll build a **HTTP/1.1** server that is capable of serving multiple clients.
 
-Along the way you'll learn about TCP servers,
+Further along, we'll also learn about TCP servers,
 [HTTP request syntax](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html),
 and more.
 
@@ -64,7 +69,7 @@ Time to move on to the next stage!
 
 ## Stage 2  —  Responding With SC "200"
 
-Note: This section example is for stages 2 and beyond.
+**Note:** This section example is for stages 2 and beyond.
 
 1. Ensure you have `bun (1.1)` installed locally
 1. Run **`$ ./your_program.sh`** in a **Bash Terminal** to run your program, which is implemented in
@@ -75,14 +80,16 @@ Note: This section example is for stages 2 and beyond.
 ## Stage 3  —  Extracting URL Path
 
 ### 1. Components or Elements of a URL
+More to come ...
 
 ### 2. Splitting URLs with TypeScript
+More to come ...
 
 ### 3. Determining the Validity of the URL
-
+More to come ...
 
 ## Stage 4  —  Responding With the HTML Body
-Add content ...
+More to come ...
 
 References:
 

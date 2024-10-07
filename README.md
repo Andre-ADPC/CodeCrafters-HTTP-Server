@@ -1,13 +1,15 @@
 <!-- @format -->
+## **$${\color{#103530}Welcome}$$**
+
 ---
 [![progress-banner](https://backend.codecrafters.io/progress/http-server/c0244b38-47ec-4d61-9992-09940cf4b97f)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
 
 ---
-## **$${\color{#103530}Welcome}$$**
-
 
 # CodeCrafters  —  Build Your Own HTTP 1.1 Server in TypeScript with Bun
-My personal Practice Repo on [CodeCrafters](https://app.codecrafters.io/courses/http-server/stages/df4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f). You will not be able to access it though, and it's results are posted here for a personal reference, and to share with those that might be interested in the approach I applied to make it work.
+My personal Practice Repo is also on [CodeCrafters](https://app.codecrafters.io/courses/http-server/stages/df4?repo=c0244b38-47ec-4d61-9992-09940cf4b97f). You will not be able to access it though, but it's easy to get started on the **[CodeCrafters](https://app.codecrafters.io/courses/)** platform and tinker with various coding challenges.
+
+Its results are posted here for a personal reference, and to share with those that might be interested in the approach I applied to make it work.
 
 To test the server's functionality the CodeCrafters's [HTTP Server Tester](https://github.com/codecrafters-io/http-server-tester) public repository was made available.
 
